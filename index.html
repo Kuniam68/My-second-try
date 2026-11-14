@@ -458,6 +458,15 @@ function resetCalculator() {
 function calculateGRACE() {
 
     // 1. Read clinical parameters
+    if (
+    document.getElementById("age").value === "" ||
+    document.getElementById("hr").value === "" ||
+    document.getElementById("sbp").value === "" ||
+    document.getElementById("creatinine").value === ""
+) {
+    alert("Please fill in all numerical fields.");
+    return;
+}
     let age = Number(document.getElementById("age").value);
     let hr = Number(document.getElementById("heartRate").value);
     let sbp = Number(document.getElementById("sbp").value);
