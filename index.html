@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -216,7 +215,8 @@ function calculateAG() {
             error.innerHTML = "Please enter a valid albumin value.";
             return;
         }
-let correctedAG = ag + 2.5 * (4 - albumin);
+
+    let correctedAG = ag + 2.5 * (4 - albumin);
 
         document.getElementById("correctedResult").innerHTML =
             correctedAG.toFixed(2) + " mmol/L";
