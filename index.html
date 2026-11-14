@@ -359,6 +359,29 @@ button:hover {
 .main-footer p {
     margin: 6px 0;
 }
+.calculator-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 20px auto;
+}
+
+.calculator-nav a {
+    text-decoration: none;
+    background: #e0f2fe;
+    color: #075985;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.calculator-nav a:hover {
+    background: #075985;
+    color: white;
+}
 </style>
    
 </head>
@@ -368,6 +391,10 @@ button:hover {
     <h1>Clinical Calculator Hub</h1>
     <p>Medical scoring and clinical assessment tools</p>
 </header>
+<nav class="calculator-nav">
+    <a href="#grace">GRACE Calculator</a>
+    <a href="#anion-gap">Anion Gap Calculator</a>
+</nav>
 <div class="calculator-card" id="grace">
 <h1>GRACE Score Calculator</h1>
 
