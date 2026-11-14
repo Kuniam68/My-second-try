@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -196,7 +197,7 @@ function calculateAG() {
         !Number.isFinite(na) ||
         !Number.isFinite(cl) ||
         !Number.isFinite(hco3) ||
-        na <= 0  cl <= 0  hco3 <= 0
+        na <= 0 || cl <= 0 || hco3 <= 0
     ) {
         error.innerHTML = "Please enter valid electrolyte values.";
         return;
@@ -216,7 +217,7 @@ function calculateAG() {
             return;
         }
 
-    let correctedAG = ag + 2.5 * (4 - albumin);
+        let correctedAG = ag + 2.5 * (4 - albumin);
 
         document.getElementById("correctedResult").innerHTML =
             correctedAG.toFixed(2) + " mmol/L";
