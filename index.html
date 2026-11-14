@@ -1,3 +1,4 @@
+Subrata Das, [Nov 15, 2026 at 1:54 AM]
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Professional BMI Calculator</title>
+<title>Anion Gap Calculator</title>
 
 <style>
 
@@ -15,120 +16,94 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #e0f2fe, #eef2ff);
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background: #eef2f7;
     padding: 20px;
+    margin: 0;
 }
 
 .container {
+    max-width: 480px;
+    margin: 30px auto;
     background: white;
-    width: 100%;
-    max-width: 430px;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 35px rgba(0,0,0,0.10);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px #00000012;
 }
 
 h1 {
-    text-align: center;
     color: #1d4ed8;
-    margin-bottom: 8px;
+    text-align: center;
 }
 
 .subtitle {
     text-align: center;
     color: #64748b;
-    margin-bottom: 30px;
+    font-size: 14px;
 }
 
 label {
     display: block;
+    margin-top: 17px;
     font-weight: bold;
-    margin: 15px 0 7px;
     color: #334155;
 }
 
 input {
     width: 100%;
-    padding: 14px;
+    padding: 13px;
+    margin-top: 7px;
     border: 1px solid #cbd5e1;
-    border-radius: 9px;
+    border-radius: 8px;
     font-size: 16px;
 }
 
-input:focus {
-    outline: 2px solid #60a5fa;
-    border-color: #2563eb;
-}
-
-.buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 25px;
-}
-
 button {
-    flex: 1;
-    padding: 13px;
+    width: 100%;
+    padding: 14px;
+    margin-top: 22px;
     border: none;
-    border-radius: 9px;
-    font-size: 15px;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
 }
 
-.calculate {
-    background: #2563eb;
-    color: white;
-}
-
 .reset {
-    background: #e2e8f0;
-    color: #334155;
+    background: #64748b;
+    margin-top: 10px;
 }
 
-#result {
+.result {
     display: none;
-    margin-top: 25px;
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    background: #f1f5f9;
+    margin-top: 22px;
+    padding: 18px;
+    background: #eff6ff;
+    border-radius: 10px;
 }
 
-#bmiValue {
-    font-size: 38px;
+.result h3 {
+    color: #1d4ed8;
+}
+
+.value {
+    font-size: 26px;
     font-weight: bold;
-    margin: 12px;
+    color: #15803d;
 }
 
-#category {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-#message {
-    color: #64748b;
-    margin-top: 12px;
-    font-size: 14px;
-}
-
-.error {
+#error {
     color: #dc2626;
-    text-align: center;
     margin-top: 15px;
+    text-align: center;
 }
 
-.disclaimer {
+.note {
     color: #64748b;
     font-size: 12px;
-    line-height: 1.5;
-    margin-top: 25px;
-    text-align: center;
+    line-height: 1.6;
+    margin-top: 20px;
 }
 
 </style>
@@ -138,80 +113,76 @@ button {
 
 <div class="container">
 
-    <h1>BMI Calculator</h1>
+<h1>Anion Gap Calculator</h1>
 
-    <p class="subtitle">
-        Calculate your Body Mass Index
-    </p>
+<p class="subtitle">
+Calculate AG and albumin-corrected AG
+</p>
 
-    <label for="weight">Weight (kg)</label>
+<label for="na">Sodium (Na⁺) — mmol/L</label>
+<input type="number" id="na"
+placeholder="Example: 140" step="any">
 
-    <input
-        type="number"
-        id="weight"
-        placeholder="Example: 70"
-        min="0.1"
-        step="any"
-    >
+<label for="cl">Chloride (Cl⁻) — mmol/L</label>
+<input type="number" id="cl"
+placeholder="Example: 104" step="any">
 
-    <label for="height">Height (cm)</label>
+<label for="hco3">Bicarbonate (HCO₃⁻) — mmol/L</label>
+<input type="number" id="hco3"
+placeholder="Example: 18" step="any">
 
-    <input
-        type="number"
-        id="height"
-        placeholder="Example: 175"
-        min="1"
-        step="any"
-    >
+<label for="albumin">Albumin — g/dL (optional)</label>
+<input type="number" id="albumin"
+placeholder="Example: 2.5" step="any">
 
-    <div class="buttons">
+<button onclick="calculateAG()">
+Calculate Anion Gap
+</button>
 
-        <button class="calculate"
-        onclick="calculateBMI()">
-            Calculate BMI
-        </button>
+<button class="reset" onclick="resetCalculator()">
+Reset
+</button>
 
-        <button class="reset"
-        onclick="resetCalculator()">
-            Reset
-        </button>
+<div id="error"></div>
 
-    </div>
+<div class="result" id="result">
 
-    <div id="error" class="error"
-    role="alert"></div>
+    <h3>Calculation Results</h3>
 
-    <div id="result" aria-live="polite">
+    <p>Uncorrected Anion Gap</p>
+    <div class="value" id="agResult"></div>
 
-        <p>Your BMI is</p>
+    <p>Albumin-corrected Anion Gap</p>
+    <div class="value" id="correctedResult"></div>
 
-        <div id="bmiValue"></div>
+    <p id="interpretation"></p>
 
-        <div id="category"></div>
+</div>
 
-        <div id="message"></div>
+<p class="note">
+Formula:
+AG = Na - (Cl + HCO3)
 
-    </div>
+Corrected AG = AG + 2.5 × (4 - Albumin)
 
-    <p class="disclaimer">
-        Adult BMI screening tool.
-        BMI is not a standalone diagnosis.
-        Not intended for children or pregnancy.
-    </p>
+Albumin correction is displayed only when
+a valid albumin value is entered.
+
+Interpretation depends on the laboratory's
+reference range and clinical context.
+</p>
 
 </div>
 
 <script>
 
-function calculateBMI() {
+function calculateAG() {
 
-    let weight = Number(
-        document.getElementById("weight").value
-    );
+    let na = Number(document.getElementById("na").value);
+    let cl = Number(document.getElementById("cl").value);
+    let hco3 = Number(document.getElementById("hco3").value);
 
-    let height = Number(
-        document.getElementById("height").value
-    );
+    let albuminInput = document.getElementById("albumin").value;
 
     let error = document.getElementById("error");
     let result = document.getElementById("result");
@@ -220,91 +191,28 @@ function calculateBMI() {
     result.style.display = "none";
 
     if (
-        !Number.isFinite(weight) ||
-        !Number.isFinite(height) ||
-        weight <= 0 ||
-        height <= 0
+        document.getElementById("na").value === "" ||
+        document.getElementById("cl").value === "" ||
+        document.getElementById("hco3").value === "" ||
+        !Number.isFinite(na) ||
+        !Number.isFinite(cl) ||
+        !Number.isFinite(hco3) ||
+        na <= 0  cl <= 0  hco3 <= 0
     ) {
-
-        error.innerHTML =
-            "Please enter valid weight and height.";
-
+        error.innerHTML = "Please enter valid electrolyte values.";
         return;
     }
 
-    let heightMeter = height / 100;
+    let ag = na - (cl + hco3);
 
-    let bmi = weight /
-        (heightMeter * heightMeter);
+    document.getElementById("agResult").innerHTML =
+        ag.toFixed(2) + " mmol/L";
 
-    let category;
-    let color;
-    let message;
+    if (albuminInput !== "") {
 
-    if (bmi < 18.5) {
+        let albumin = Number(albuminInput);
 
-        category = "Underweight";
-        color = "#2563eb";
-        message = "BMI is below the adult reference range.";
-
-    }
-
-    else if (bmi < 25) {category = "Normal weight";
-        color = "#16a34a";
-        message = "BMI is within the normal adult range.";
-
-    }
-
-    else if (bmi < 30) {
-
-        category = "Overweight";
-        color = "#d97706";
-        message = "BMI is above the normal adult range.";
-
-    }
-
-    else {
-
-        category = "Obesity";
-        color = "#dc2626";
-        message = "BMI is in the adult obesity range.";
-
-    }
-
-    document.getElementById("bmiValue")
-        .innerHTML = bmi.toFixed(2);
-
-    document.getElementById("category")
-        .innerHTML = category;
-
-    document.getElementById("category")
-        .style.color = color;
-
-    document.getElementById("bmiValue")
-        .style.color = color;
-
-    document.getElementById("message")
-        .innerHTML = message;
-
-    result.style.display = "block";
-
-}
-
-function resetCalculator() {
-
-    document.getElementById("weight").value = "";
-
-    document.getElementById("height").value = "";
-
-    document.getElementById("result")
-        .style.display = "none";
-
-    document.getElementById("error")
-        .innerHTML = "";
-
-}
-
-</script>
-
-</body>
-</html>
+        if (!Number.isFinite(albumin) || albumin <= 0) {
+            error.innerHTML = "Please enter a valid albumin value.";
+            return;
+        }
