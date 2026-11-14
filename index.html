@@ -241,22 +241,27 @@ button:hover {
 <h2>Patient Clinical Parameters</h2>
 
 <label for="age">Age (years):</label>
-<input type="number" id="age" placeholder="Enter age">
+<input type="number" id="age"
+min="18" max="120" placeholder="Enter age">
 
 <br><br>
 
 <label for="heartRate">Heart Rate (beats/min):</label>
-<input type="number" id="heartRate" placeholder="Enter heart rate">
+<input type="number" id="heartRate"
+min="20" max="300" placeholder="Enter heart rate">
 
 <br><br>
 
 <label for="sbp">Systolic Blood Pressure (mmHg):</label>
-<input type="number" id="sbp" placeholder="Enter systolic BP">
+<input type="number" id="sbp"
+min="40" max="300" placeholder="Enter systolic BP">
 
 <br><br>
 
 <label for="creatinine">Serum Creatinine (mg/dL):</label>
-<input type="number" id="creatinine" step="0.1" placeholder="Enter creatinine">
+<input type="number" id="creatinine"
+min="0.1" max="20" step="0.1"
+placeholder="Enter creatinine">
 <br><br>
 
 <label for="killip">Killip Class:</label>
@@ -463,16 +468,29 @@ function calculateGRACE() {
     let st = Number(document.getElementById("st").value);
     let enzymes = Number(document.getElementById("enzymes").value);
 
+
     // 2. Validate numerical inputs
-    let inputs = ["age", "heartRate", "sbp", "creatinine"];
 
-    for (let id of inputs) {
-        let value = document.getElementById(id).value;
+    if (
+        !Number.isFinite(age) || age < 18 || age > 120 ||
+        !Number.isFinite(hr) || hr < 20 || hr > 300 ||
+        !Number.isFinite(sbp) || sbp < 40 || sbp > 300 ||
+        !Number.isFinite(cr) || cr <= 0 || cr > 20
+    ) {
+        alert("Please enter valid clinical parameters.");
+        return;
+    }
 
-        if (value === "" || !Number.isFinite(Number(value)) ||
-            Number(value) < 0) {
-            alert("Please enter valid clinical parameters.");
-            return;
+    if (
+        ![1, 2, 3, 4].includes(killip) ||
+        ![0, 1].includes(arrest) ||
+        ![0, 1].includes(st) ||
+        ![0, 1].includes(enzymes)
+    ) {
+        alert("Please select valid clinical parameters.");
+        return;
+    }
+
         }
     }
 
