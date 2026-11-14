@@ -169,6 +169,17 @@ button {
     <option value="0">No</option>
     <option value="1">Yes</option>
 </select>
+<br><br>
+
+<button onclick="calculateGRACE()">
+    Calculate GRACE Score
+</button>
+
+<h2>Calculation Result</h2>
+
+<div id="result">
+    Your GRACE score will appear here.
+</div>
 <div class="container">
 
 <h1>Anion Gap Calculator</h1>
@@ -309,6 +320,101 @@ function resetCalculator() {
 
 }
 
+</script>
+
+<script>
+function calculateGRACE() {
+
+    // 1. Read clinical parameters
+    let age = Number(document.getElementById("age").value);
+    let hr = Number(document.getElementById("heartRate").value);
+    let sbp = Number(document.getElementById("sbp").value);
+    let cr = Number(document.getElementById("creatinine").value);
+
+    let killip = Number(document.getElementById("killip").value);
+    let arrest = Number(document.getElementById("arrest").value);
+    let st = Number(document.getElementById("st").value);
+    let enzymes = Number(document.getElementById("enzymes").value);
+
+    // 2. Validate numerical inputs
+    let inputs = ["age", "heartRate", "sbp", "creatinine"];
+
+    for (let id of inputs) {
+        let value = document.getElementById(id).value;
+
+        if (value === "" || !Number.isFinite(Number(value)) ||
+            Number(value) < 0) {
+            alert("Please enter valid clinical parameters.");
+            return;
+        }
+    }
+
+    // 3. Calculate age points
+    let agePoints =
+        age < 30 ? 0 :
+        age < 40 ? 8 :
+        age < 50 ? 25 :
+        age < 60 ? 41 :
+        age < 70 ? 58 :
+        age < 80 ? 75 :
+        age < 90 ? 91 : 100;
+
+    // 4. Calculate heart rate points
+    let hrPoints =
+        hr < 50 ? 0 :
+        hr < 70 ? 3 :
+        hr < 90 ? 9 :
+        hr < 110 ? 15 :
+        hr < 150 ? 24 :
+        hr < 200 ? 38 : 46;
+
+    // 5. Calculate systolic BP points
+    let sbpPoints =
+        sbp < 80 ? 58 :
+        sbp < 100 ? 53 :
+        sbp < 120 ? 43 :
+        sbp < 140 ? 34 :
+        sbp < 160 ? 24 :
+        sbp < 200 ? 10 : 0;
+
+    // 6. Calculate creatinine points
+    let crPoints =
+        cr < 0.40 ? 1 :
+        cr < 0.80 ? 4 :
+        cr < 1.20 ? 7 :
+        cr < 1.60 ? 10 :
+        cr < 2.00 ? 13 :
+        cr < 4.00 ? 21 : 28;
+
+    // 7. Calculate total GRACE score
+    let total =
+        agePoints +
+        hrPoints +
+        sbpPoints +
+        crPoints +
+        (killip === 1 ? 0 :
+         killip === 2 ? 20 :
+         killip === 3 ? 39 : 59) +
+        arrest * 39 +
+        st * 28 +
+        enzymes * 14;
+
+    // 8. Determine risk category
+    let risk;
+
+    if (total <= 108) {
+        risk = "Low Risk";
+    } else if (total <= 140) {
+        risk = "Intermediate Risk";
+    } else {
+        risk = "High Risk";
+    }
+
+    // 9. Display result
+    document.getElementById("result").innerHTML =
+        "<h3>Total GRACE Score: " + total + "</h3>" +
+        "<h3>Risk Category: " + risk + "</h3>";
+}
 </script>
 
 </body>
