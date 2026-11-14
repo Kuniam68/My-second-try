@@ -195,6 +195,15 @@ button:hover {
     }
 }
 
+.reset-btn {
+    background-color: #64748b;
+    margin-top: 10px;
+}
+
+.reset-btn:hover {
+    background-color: #475569;
+}
+
 </style>
    
 </head>
@@ -264,6 +273,11 @@ button:hover {
 <button onclick="calculateGRACE()">
     Calculate GRACE Score
 </button>
+
+<button onclick="resetGRACE()" class="reset-btn">
+    Reset Calculator
+</button>
+
 
 <h2>Calculation Result</h2>
 
@@ -505,6 +519,26 @@ function calculateGRACE() {
         "<h3>Total GRACE Score: " + total + "</h3>" +
         "<h3>Risk Category: " + risk + "</h3>";
 }
+
+function resetGRACE() {
+
+    // Clear all numerical inputs
+    document.getElementById("age").value = "";
+    document.getElementById("heartRate").value = "";
+    document.getElementById("sbp").value = "";
+    document.getElementById("creatinine").value = "";
+
+    // Reset dropdown menus
+    document.getElementById("killip").selectedIndex = 0;
+    document.getElementById("arrest").selectedIndex = 0;
+    document.getElementById("st").selectedIndex = 0;
+    document.getElementById("enzymes").selectedIndex = 0;
+
+    // Clear previous result
+    document.getElementById("result").innerHTML =
+        "Your GRACE score will appear here.";
+}
+
 </script>
 
 </body>
