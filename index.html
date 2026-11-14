@@ -133,7 +133,10 @@ h1 {
 h2 {
     color: #075985;
     border-bottom: 2px solid #dbeafe;
-    padding-bottom: 8px;
+    padding-bottom: 10px;
+    margin-top: 25px;
+    font-size: 21px;
+    font-weight: 700;
 }
 
 /* Input labels */
@@ -147,12 +150,19 @@ label {
 /* Input fields and dropdowns */
 input, select {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     border: 1px solid #cbd5e1;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 16px;
-    background-color: white;
+    background-color: #ffffff;
     box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #0284c7;
+    box-shadow: 0 0 0 3px #0284c720;
 }
 
 /* Calculate button */
@@ -160,18 +170,19 @@ button {
     width: 100%;
     padding: 14px;
     margin-top: 20px;
-    background-color: #087e8b;
+    background: linear-gradient(135deg, #087e8b, #075985);
     color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 17px;
+    border-radius: 10px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-/* Button hover effect */
 button:hover {
-    background-color: #065f68;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px #07598530;
 }
 
 /* Result section */
@@ -309,11 +320,44 @@ button:hover {
         box-sizing: border-box;
     }
 }
+.main-header {
+    background: linear-gradient(135deg, #075985, #0e7490);
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    border-radius: 14px;
+    margin-bottom: 25px;
+}
+
+.main-header h1 {
+    color: white;
+    font-size: 26px;
+    margin: 0 0 8px;
+}
+
+.main-header p {
+    color: #e0f2fe;
+    font-size: 14px;
+    margin: 0;
+}
+.calculator-card {
+    background: white;
+    padding: 25px;
+    margin: 20px auto;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px #00000012;
+    max-width: 650px;
+}
 </style>
    
 </head>
 
 <body>
+<header class="main-header">
+    <h1>Clinical Calculator Hub</h1>
+    <p>Medical scoring and clinical assessment tools</p>
+</header>
+<div class="calculator-card">
 <h1>GRACE Score Calculator</h1>
 
 <p>
@@ -397,6 +441,7 @@ placeholder="Enter creatinine">
 <button onclick="printGRACEReport()" class="print-button">
     Print GRACE Report
 </button>
+</div>
 <div class="container">
 
 <h1>Anion Gap Calculator</h1>
