@@ -1,4 +1,4 @@
-Subrata Das, [Nov 15, 2026 at 1:54 AM]
+Subrata Das, [Nov 15, 2026 at 2:01 AM]
 <!DOCTYPE html>
 <html lang="en">
 
@@ -216,3 +216,41 @@ function calculateAG() {
             error.innerHTML = "Please enter a valid albumin value.";
             return;
         }
+let correctedAG = ag + 2.5 * (4 - albumin);
+
+        document.getElementById("correctedResult").innerHTML =
+            correctedAG.toFixed(2) + " mmol/L";
+
+        document.getElementById("interpretation").innerHTML =
+            "Albumin correction has been applied.";
+
+    } else {
+
+        document.getElementById("correctedResult").innerHTML =
+            "Not calculated (albumin not entered)";
+
+        document.getElementById("interpretation").innerHTML =
+            "Enter albumin to calculate corrected AG.";
+
+    }
+
+    result.style.display = "block";
+
+}
+
+function resetCalculator() {
+
+    document.getElementById("na").value = "";
+    document.getElementById("cl").value = "";
+    document.getElementById("hco3").value = "";
+    document.getElementById("albumin").value = "";
+
+    document.getElementById("result").style.display = "none";
+    document.getElementById("error").innerHTML = "";
+
+}
+
+</script>
+
+</body>
+</html>
