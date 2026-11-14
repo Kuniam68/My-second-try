@@ -204,6 +204,29 @@ button:hover {
     background-color: #475569;
 }
 
+.score-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: white;
+}
+
+.score-table th {
+    background: #087e8b;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+.score-table td {
+    padding: 12px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.score-table tr:last-child {
+    font-weight: bold;
+}
+
 </style>
    
 </head>
@@ -514,10 +537,31 @@ function calculateGRACE() {
         risk = "High Risk";
     }
 
-    // 9. Display result
-    document.getElementById("result").innerHTML =
-        "<h3>Total GRACE Score: " + total + "</h3>" +
-        "<h3>Risk Category: " + risk + "</h3>";
+// 9. Display individual point breakdown
+
+document.getElementById("result").innerHTML = `
+    <h2>GRACE Score Results</h2>
+
+    <table class="score-table">
+        <tr>
+            <th>Clinical Parameter</th>
+            <th>Points</th>
+        </tr>
+        <tr><td>Age</td><td>${agePoints}</td></tr>
+        <tr><td>Heart Rate</td><td>${hrPoints}</td></tr>
+        <tr><td>Systolic BP</td><td>${sbpPoints}</td></tr>
+        <tr><td>Creatinine</td><td>${crPoints}</td></tr>
+        <tr><td>Killip Class</td><td>${killip === 1 ? 0 : killip === 2 ? 20 : killip === 3 ? 39 : 59}</td></tr>
+        <tr><td>Cardiac Arrest</td><td>${arrest * 39}</td></tr>
+        <tr><td>ST Deviation</td><td>${st * 28}</td></tr>
+        <tr><td>Elevated Enzymes</td><td>${enzymes * 14}</td></tr>
+    </table>
+
+    <h2>Total Score: ${total}</h2>
+    <h3>Risk Category: ${risk}</h3>
+`;
+
+
 }
 
 function resetGRACE() {
