@@ -346,7 +346,7 @@ Reset
 
 <div id="error"></div>
 
-<div class="result" id="result">
+<div class="result" id="agResultBox">
 
     <h3>Calculation Results</h3>
 
@@ -386,7 +386,7 @@ function calculateAG() {
     let albuminInput = document.getElementById("albumin").value;
 
     let error = document.getElementById("error");
-    let result = document.getElementById("result");
+    let result = document.getElementById("agResultBox");
 
     error.innerHTML = "";
     result.style.display = "none";
@@ -447,7 +447,7 @@ function resetCalculator() {
     document.getElementById("hco3").value = "";
     document.getElementById("albumin").value = "";
 
-    document.getElementById("result").style.display = "none";
+    document.getElementById("agResultBox").style.display = "none";
     document.getElementById("error").innerHTML = "";
 
 }
@@ -481,6 +481,7 @@ function calculateGRACE() {
         return;
     }
 
+    
     if (
         ![1, 2, 3, 4].includes(killip) ||
         ![0, 1].includes(arrest) ||
@@ -489,9 +490,6 @@ function calculateGRACE() {
     ) {
         alert("Please select valid clinical parameters.");
         return;
-    }
-
-        }
     }
 
     // 3. Calculate age points
