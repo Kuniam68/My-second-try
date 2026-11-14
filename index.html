@@ -281,6 +281,21 @@ button:hover {
     padding-top: 12px;
     margin-top: 18px;
 }
+.print-button {
+    background: #075985;
+    color: white;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.print-button:hover {
+    background: #0369a1;
+}
 </style>
    
 </head>
@@ -366,6 +381,9 @@ placeholder="Enter creatinine">
 <div id="result">
     Your GRACE score will appear here.
 </div>
+<button onclick="printGRACEReport()" class="print-button">
+    Print GRACE Report
+</button>
 <div class="container">
 
 <h1>Anion Gap Calculator</h1>
@@ -668,7 +686,39 @@ document.getElementById("result").innerHTML = `
 
 
 }
+function printGRACEReport() {
+    let report = document.getElementById("result");
 
+    if (report.innerHTML.trim() === "") {
+        alert("Please calculate the GRACE score first.");
+        return;
+    }
+
+    let printWindow = window.open("", "_blank");
+
+    printWindow.document.write(`
+        <html>
+        <head>
+            <title>GRACE Score Report</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    padding: 25px;
+                }
+            </style>
+        </head>
+        <body>
+            <h2>GRACE Score Report</h2>
+            ${report.innerHTML}
+        </body>
+        </html>
+    `);
+
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+    printWindow.close();
+}
 function resetGRACE() {
 
     // Clear all numerical inputs
