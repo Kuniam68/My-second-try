@@ -266,6 +266,21 @@ button:hover {
     background: #fee2e2;
     color: #991b1b;
 }
+.risk-description {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 12px 0;
+    color: #334155;
+}
+
+.clinical-disclaimer {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #64748b;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 12px;
+    margin-top: 18px;
+}
 </style>
    
 </head>
@@ -617,7 +632,20 @@ document.getElementById("result").innerHTML = `
         }">
             ${risk}
         </div>
+        <p class="risk-description">
+    ${
+        risk === "Low Risk"
+        ? "Lower estimated risk. Clinical assessment and appropriate ACS management are still essential."
+        : risk === "Intermediate Risk"
+        ? "Intermediate estimated risk. Consider the overall clinical picture when planning management."
+        : "Higher estimated risk. Prompt clinical assessment and appropriate monitoring are important."
+    }
+</p>
 
+<p class="clinical-disclaimer">
+    This calculator is an educational aid. It does not replace clinical judgment,
+    validated risk assessment, or local treatment protocols.
+</p>
         <h3>Individual Point Breakdown</h3>
 
         <table class="score-table">
