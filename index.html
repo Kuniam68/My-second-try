@@ -494,13 +494,13 @@ function calculateGRACE() {
 
     // 3. Calculate age points
     let agePoints =
-        age <= 30 ? 0 :
-        age <= 39 ? 8 :
-        age <= 49 ? 25 :
-        age <= 59 ? 41 :
-        age <= 69 ? 58 :
-        age <= 79 ? 75 :
-        age <= 89 ? 91 : 100;
+    age < 30 ? 0 :
+    age < 40 ? 8 :
+    age < 50 ? 25 :
+    age < 60 ? 41 :
+    age < 70 ? 58 :
+    age < 80 ? 75 :
+    age < 90 ? 91 : 100;
 
     // 4. Calculate heart rate points
     let hrPoints =
