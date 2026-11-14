@@ -351,31 +351,31 @@ function calculateGRACE() {
 
     // 3. Calculate age points
     let agePoints =
-        age < 30 ? 0 :
-        age < 40 ? 8 :
-        age < 50 ? 25 :
-        age < 60 ? 41 :
-        age < 70 ? 58 :
-        age < 80 ? 75 :
-        age < 90 ? 91 : 100;
+        age <= 30 ? 0 :
+        age <= 39 ? 8 :
+        age <= 49 ? 25 :
+        age <= 59 ? 41 :
+        age <= 69 ? 58 :
+        age <= 79 ? 75 :
+        age <= 89 ? 91 : 100;
 
     // 4. Calculate heart rate points
     let hrPoints =
-        hr < 50 ? 0 :
-        hr < 70 ? 3 :
-        hr < 90 ? 9 :
-        hr < 110 ? 15 :
-        hr < 150 ? 24 :
-        hr < 200 ? 38 : 46;
+        hr <= 50 ? 0 :
+        hr <= 69 ? 3 :
+        hr <= 89 ? 9 :
+        hr <= 109 ? 15 :
+        hr <= 149 ? 24 :
+        hr <= 199 ? 38 : 46;
 
     // 5. Calculate systolic BP points
     let sbpPoints =
-        sbp < 80 ? 58 :
-        sbp < 100 ? 53 :
-        sbp < 120 ? 43 :
-        sbp < 140 ? 34 :
-        sbp < 160 ? 24 :
-        sbp < 200 ? 10 : 0;
+        sbp <= 80 ? 58 :
+        sbp <= 99 ? 53 :
+        sbp <= 119 ? 43 :
+        sbp <= 139 ? 34 :
+        sbp <= 159 ? 24 :
+        sbp <= 199 ? 10 : 0;
 
     // 6. Calculate creatinine points
     let crPoints =
