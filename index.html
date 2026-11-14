@@ -604,25 +604,38 @@ function calculateGRACE() {
 // 9. Display individual point breakdown
 
 document.getElementById("result").innerHTML = `
-    <h2>GRACE Score Results</h2>
+    <div class="grace-result">
 
-    <table class="score-table">
-        <tr>
-            <th>Clinical Parameter</th>
-            <th>Points</th>
-        </tr>
-        <tr><td>Age</td><td>${agePoints}</td></tr>
-        <tr><td>Heart Rate</td><td>${hrPoints}</td></tr>
-        <tr><td>Systolic BP</td><td>${sbpPoints}</td></tr>
-        <tr><td>Creatinine</td><td>${crPoints}</td></tr>
-        <tr><td>Killip Class</td><td>${killip === 1 ? 0 : killip === 2 ? 20 : killip === 3 ? 39 : 59}</td></tr>
-        <tr><td>Cardiac Arrest</td><td>${arrest * 39}</td></tr>
-        <tr><td>ST Deviation</td><td>${st * 28}</td></tr>
-        <tr><td>Elevated Enzymes</td><td>${enzymes * 14}</td></tr>
-    </table>
+        <h2>GRACE Score Results</h2>
 
-    <h2>Total Score: ${total}</h2>
-    <h3>Risk Category: ${risk}</h3>
+        <div class="total-score">${total}</div>
+
+        <div class="risk-category ${
+            risk === "Low Risk" ? "low-risk" :
+            risk === "Intermediate Risk" ? "intermediate-risk" :
+            "high-risk"
+        }">
+            ${risk}
+        </div>
+
+        <h3>Individual Point Breakdown</h3>
+
+        <table class="score-table">
+            <tr>
+                <th>Clinical Parameter</th>
+                <th>Points</th>
+            </tr>
+            <tr><td>Age</td><td>${agePoints}</td></tr>
+            <tr><td>Heart Rate</td><td>${hrPoints}</td></tr>
+            <tr><td>Systolic BP</td><td>${sbpPoints}</td></tr>
+            <tr><td>Creatinine</td><td>${crPoints}</td></tr>
+            <tr><td>Killip Class</td><td>${killip === 1 ? 0 : killip === 2 ? 20 : killip === 3 ? 39 : 59}</td></tr>
+            <tr><td>Cardiac Arrest</td><td>${arrest * 39}</td></tr>
+            <tr><td>ST Deviation</td><td>${st * 28}</td></tr>
+            <tr><td>Elevated Enzymes</td><td>${enzymes * 14}</td></tr>
+        </table>
+
+    </div>
 `;
 
 
