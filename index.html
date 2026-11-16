@@ -860,5 +860,43 @@ function resetGRACE() {
 
 </script>
 
+<script>
+
+// ===== CALCULATOR VISIBILITY CONTROL =====
+
+function updateCalculatorVisibility() {
+
+    const graceCalculator = document.getElementById("grace");
+    const anionCalculator = document.getElementById("anion-gap");
+
+    const selectedCalculator = window.location.hash;
+
+    // Show both calculators by default
+    graceCalculator.classList.remove("calculator-hidden");
+    anionCalculator.classList.remove("calculator-hidden");
+
+    // Show only GRACE
+    if (selectedCalculator === "#grace") {
+
+        anionCalculator.classList.add("calculator-hidden");
+
+    }
+
+    // Show only Anion Gap
+    else if (selectedCalculator === "#anion-gap") {
+
+        graceCalculator.classList.add("calculator-hidden");
+
+    }
+
+}
+
+// Run when the page loads
+updateCalculatorVisibility();
+
+// Run when the URL hash changes
+window.addEventListener("hashchange", updateCalculatorVisibility);
+
+</script>
 </body>
 </html>
